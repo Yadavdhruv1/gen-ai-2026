@@ -1,0 +1,9 @@
+{
+    "name": "assignment-01-persona-chatbot",
+    "version": "1.0.0",
+    "description": "Persona-Based AI Chatbot — Gen AI Assignment 01",
+    "private": true,
+    "dependencies": {
+        "@google/genai": "^1.50.1"
+    }
+}

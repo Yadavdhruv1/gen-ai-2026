@@ -1,0 +1,25 @@
+{
+  "name": "ai-agent-cli",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "cli",
+    "openai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "A conversational AI Agent CLI tool that can generate websites using natural language instructions.",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.16.0",
+    "dotenv": "^17.4.2",
+    "groq-sdk": "^1.1.2",
+    "openai": "^6.36.0"
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NotebookLM RAG — Chat with Your Documents</title>
+  <meta name="description" content="Upload any PDF or text document and have a grounded AI conversation powered by a full RAG pipeline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ─── Ambient background blobs ─── -->
+  <div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div id="app">
+    <!-- ─── Header ─── -->
+    <header id="site-header">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+          <circle cx="12" cy="10" r="2"/><path d="M12 12v3"/>
+        </svg>
+        <span>NotebookLM <em>RAG</em></span>
+      </div>
+      <div class="header-badge" id="header-status">No document loaded</div>
+    </header>
+
+    <!-- ─── Upload Screen ─── -->
+    <main id="upload-screen" class="screen active">
+      <div class="upload-card glass">
+        <div class="upload-icon">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <polyline points="9 15 12 12 15 15"/>
+          </svg>
+        </div>
+        <h1>Chat with Your Document</h1>
+        <p class="subtitle">Upload a PDF or text file and start asking questions.<br/>All answers are grounded strictly in your document.</p>
+        <form id="upload-form">
+          <label class="file-drop" id="file-drop" for="file-input">
+            <input type="file" id="file-input" name="document" accept=".pdf,.txt" hidden />
+            <span class="drop-label" id="drop-label">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Drag & drop or click to select
+            </span>
+          </label>
+          <button type="submit" class="btn btn-primary" id="upload-btn" disabled>
+            <span class="btn-text">Upload &amp; Index</span>
+            <span class="btn-loader" hidden></span>
+          </button>
+        </form>
+        <p class="hint">Supports PDF and TXT · Max 20 MB</p>
+      </div>
+    </main>
+
+    <!-- ─── Chat Screen ─── -->
+    <main id="chat-screen" class="screen">
+      <div class="chat-container glass">
+        <div class="chat-header">
+          <h2 id="doc-title">Document Chat</h2>
+          <button class="btn btn-outline btn-sm" id="new-doc-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Document
+          </button>
+        </div>
+        <div class="messages" id="messages">
+          <div class="message assistant welcome-msg">
+            <div class="msg-avatar">🤖</div>
+            <div class="msg-body">
+              <p>Your document has been indexed! Ask me anything about it and I'll answer strictly from its content.</p>
+            </div>
+          </div>
+        </div>
+        <form id="chat-form" class="chat-input-area">
+          <input type="text" id="chat-input" placeholder="Ask a question about your document…" autocomplete="off" />
+          <button type="submit" class="btn btn-primary btn-send" id="send-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
